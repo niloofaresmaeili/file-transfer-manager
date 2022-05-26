@@ -1,10 +1,12 @@
 import { Application, Router } from 'express'
 import { IndexController } from './Controllers/IndexController'
 import { AuthController } from './Controllers/AuthController'
+import { FileController } from './Controllers/FileController'
 
 const _routes: [string, Router][] = [
   ['/', IndexController],
-  ['/auth', AuthController]
+  ['/auth', AuthController],
+  ['/files', FileController]
 ]
 
 export const routes = (app: Application) => {
