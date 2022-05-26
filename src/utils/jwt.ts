@@ -21,6 +21,7 @@ export function generateToken() {
     userId: 1,
     accessTypes: [
       'getDirectory',
+      'getPath',
       'switchDirectory',
       'uploadFile',
       'downloadFile',
@@ -48,7 +49,7 @@ export function generateToken() {
  * @param token the expected token payload
  */
 export async function validateToken(token: string): Promise<TokenPayload> {
-  const publicKey = fs.readFileSync(path.join(__dirname, './../../../public.key'));
+  const publicKey = fs.readFileSync('./security/public.key');
 
   const verifyOptions: VerifyOptions = {
     algorithms: ['RS256'],
