@@ -3,6 +3,9 @@ import { getDirectory, getPath, makeDirectory} from '../services/FileService';
 import * as Auth from '../middlewares/auth';
 import * as fs from 'fs';
 import * as path from 'path';
+import { UploadedFile } from 'express-fileupload'
+
+
 export const FileController: Router = Router()
 
 FileController.get('/directory/*', Auth.authorize(['getDirectory']),async (req: Request, res: Response, next: NextFunction) => {
@@ -46,3 +49,19 @@ FileController.get('/download/*', Auth.authorize(['downloadFile']),async (req: R
   }
 })
 
+FileController.post('/upload', Auth.authorize(['uploadFile']),async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    let file : UploadedFile = req.files!.file as UploadedFile;
+    let dir_path = req.query['path'] as string;
+    
+    const full_path = path.normalize(path.join(process.cwd(),dir_path ? dir_path : '',file.name))
+    if (!fs.existsSync(path.normalize(path.join(process.cwd(),dir_path ? dir_path : '')))){
+      return res.status(429).send({message: 'directory not exist!'})
+    }
+    file.mv(full_path);
+    //send response
+    return res.status(200).send({message: 'File is uploaded'});
+  } catch (e) {
+    next(e)
+  }
+})
