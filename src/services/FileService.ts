@@ -25,4 +25,3 @@ export async function makeDirectory(data: {path : string, new_directory_name: st
     }
     return false
 }
-

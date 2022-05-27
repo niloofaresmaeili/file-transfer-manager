@@ -1,6 +1,8 @@
 import { NextFunction, Request, Response, Router } from 'express';
 import { getDirectory, getPath, makeDirectory} from '../services/FileService';
 import * as Auth from '../middlewares/auth';
+import * as fs from 'fs';
+import * as path from 'path';
 export const FileController: Router = Router()
 
 FileController.get('/directory/*', Auth.authorize(['getDirectory']),async (req: Request, res: Response, next: NextFunction) => {
@@ -34,3 +36,13 @@ FileController.post('/make_dir/', Auth.authorize(['makeDirectory']),async (req: 
     next(e)
   }
 })
+
+FileController.get('/download/*', Auth.authorize(['downloadFile']),async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const file_path = path.normalize(path.join(process.cwd(), decodeURIComponent(req.params['0'])));
+    res.status(200).download(file_path);
+  } catch (e) {
+    next(e)
+  }
+})
+
