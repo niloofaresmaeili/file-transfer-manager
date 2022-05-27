@@ -33,4 +33,4 @@ test :
 | /auth/login           | POST |  {username: "admin", password: "password"} |Authenticate user. |
 | /files/directory/*    | GET |  |Get folders and files into current directory. |
 | /files/make_dir/      | POST | {new_dir_name: "tmp", path: "/file-transfer-manager"} |Make new directory. |
-| /files/download/*     | GET |  | download file. |
+| /files/download/*     | GET |  | Download file. |

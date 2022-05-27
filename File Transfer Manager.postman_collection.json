@@ -1,0 +1,177 @@
+{
+	"info": {
+		"_postman_id": "068eccf2-4f27-420e-8022-89dc4b33c8f9",
+		"name": "File Transfer Manager",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10023612"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "download",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "get directory",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4iLCJwYXNzd29yZCI6InBhc3N3b3JkIiwidXNlcklkIjoxLCJhY2Nlc3NUeXBlcyI6WyJnZXREaXJlY3RvcnkiLCJnZXRQYXRoIiwidXBsb2FkRmlsZSIsImRvd25sb2FkRmlsZSIsIm1ha2VEaXJlY3RvcnkiXSwiaWF0IjoxNjUzNjcyMDAyLCJleHAiOjE2NTM2NzU2MDJ9.rYRnPufmV_MbiJPIJxCWdVnpxpCumpm0oops7k0a3MqdSOE2HLDQzvKtwto6-vsnArXj7S2vQiDyA5-O6G4uJJqZ18ptseaeselMqLYzhlX3t20JU62Y52VKPNKZIBnNBI9g36HMjReTChp8FnghyNsOfVxZlAz-sdfRUo8n1S56g80SgByQ9ADZSbkoz4PCSPoDHjpd5wBHqAYKNHDLdfoKtPWPudlpiLZCSz_MADjudiSt3ii2w4gnxVkrcBi36UZbWmwdzfYV77GwQPGDsZ4JzGqFOOynAffFOHnxP20-llbR3FHKDTJKpGHmsNQ1ZdUsp5mP1pRwUlvH8Y_2Qg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/files/directory/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"files",
+						"directory",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "make directory",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4iLCJwYXNzd29yZCI6InBhc3N3b3JkIiwidXNlcklkIjoxLCJhY2Nlc3NUeXBlcyI6WyJnZXREaXJlY3RvcnkiLCJnZXRQYXRoIiwidXBsb2FkRmlsZSIsImRvd25sb2FkRmlsZSIsIm1ha2VEaXJlY3RvcnkiXSwiaWF0IjoxNjUzNjUwNTg1LCJleHAiOjE2NTM2NTQxODV9.ojUxi--VPzdPUfKPhiRu8WQ2BFjEvv18-ZjjC5auIl38XWH13wxHBxSOZ6GFbbOe0asvLrICSYhZgKt7rJjq7E19_67BXVsWqS2Q0qWsootasAtBAEXFthbFBgi--89Re2AyIaWTTvqmKoCwBTBFRz_qjW5NRiJaPKeW5CpB99JAFUXnz6BcTT-84o8feSc3KMEfZwHBetImeroyfu81_NFYDelxeYRuKRno2fRukYILmqgB0DD2l2ujKNLeYT_MMZDPkA-h6Jslb6FgKSCQdjFqsHR3zjqIMheaTwGmBITN3Ios7Mwm-c_rHdUSUJ_Le1ydav-9QqlJJXr1i9l-lA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"new_dir_name\": \"tmp\",\r\n    \"path\": \"/file-transfer-manager\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/files/make_dir/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"files",
+						"make_dir",
+						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "upload",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4iLCJwYXNzd29yZCI6InBhc3N3b3JkIiwidXNlcklkIjoxLCJhY2Nlc3NUeXBlcyI6WyJnZXREaXJlY3RvcnkiLCJnZXRQYXRoIiwidXBsb2FkRmlsZSIsImRvd25sb2FkRmlsZSIsIm1ha2VEaXJlY3RvcnkiXSwiaWF0IjoxNjUzNjcyMDAyLCJleHAiOjE2NTM2NzU2MDJ9.rYRnPufmV_MbiJPIJxCWdVnpxpCumpm0oops7k0a3MqdSOE2HLDQzvKtwto6-vsnArXj7S2vQiDyA5-O6G4uJJqZ18ptseaeselMqLYzhlX3t20JU62Y52VKPNKZIBnNBI9g36HMjReTChp8FnghyNsOfVxZlAz-sdfRUo8n1S56g80SgByQ9ADZSbkoz4PCSPoDHjpd5wBHqAYKNHDLdfoKtPWPudlpiLZCSz_MADjudiSt3ii2w4gnxVkrcBi36UZbWmwdzfYV77GwQPGDsZ4JzGqFOOynAffFOHnxP20-llbR3FHKDTJKpGHmsNQ1ZdUsp5mP1pRwUlvH8Y_2Qg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5000/files/upload/?path=file-transfer-manager",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"files",
+						"upload",
+						""
+					],
+					"query": [
+						{
+							"key": "path",
+							"value": "file-transfer-manager"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
