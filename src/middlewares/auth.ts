@@ -33,7 +33,6 @@ export const authorize = (allowedAccessTypes: string[]) => async (req: Request, 
 
     next();
   } catch (error: any) {
-    console.log(error)
     if (error.name === 'TokenExpiredError') {
       res.status(401).json({ message: 'Expired token' });
       return;
