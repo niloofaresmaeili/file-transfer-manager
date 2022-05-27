@@ -17,11 +17,11 @@ export async function getPath(pathInput: string){
     return path.dirname(path.normalize(pathInput));
 }
 
-export async function makeDirectory(dir_name: string) {
-    if (!fs.existsSync(dir_name)){
-        fs.mkdirSync(dir_name);
+export async function makeDirectory(data: {path : string, new_directory_name: string}) {
+    let full_path = path.normalize(path.join(process.cwd(),data.path,data.new_directory_name))
+    if (!fs.existsSync(full_path)){
+        fs.mkdirSync(full_path);
         return true
     }
     return false
 }
-
