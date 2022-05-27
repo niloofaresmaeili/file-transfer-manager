@@ -25,14 +25,12 @@ export default function App() {
       })
       .catch(console.error)
   }, [])
-  const load = () => {
-    setFiles(prev => ([...prev, 'a new one   ']))
-    console.log(files)
-  }
+
   const downloadFile = (fileName) => { }
+
   const loadDirectory = (directoryPath) => {
-    setPathName(directoryPath)
-    Get(`/files/directory/${directoryPath}`, token)
+    setPathName(prev => prev + directoryPath)
+    Get(`/files/directory/${pathName}${directoryPath}`, token)
       .then(r => {
         setDirectories(r.data.folders)
         setFiles(r.data.files)
@@ -41,7 +39,6 @@ export default function App() {
   return html`<div>
       <h1>File manager!</h1>
       <input value=${pathName} onChange=${setPathName} />
-      <div><button onClick=${load}>load again</button></div>
       <${Files} files=${directories} onClick=${loadDirectory} />
       <${Files} files=${files} onClick=${downloadFile} />
     </div>`;
