@@ -22,10 +22,14 @@ FileController.get('/get_path', Auth.authorize(['getPath']),async (req: Request,
   }
 })
 
-FileController.get('/make_dir', Auth.authorize(['makeDirectory']),async (req: Request, res: Response, next: NextFunction) => {
+FileController.post('/make_dir/', Auth.authorize(['makeDirectory']),async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const isCreated = await makeDirectory((req.query.path) as string)
-    res.status(200).send({ message: isCreated ? "created" : "directory existed!" })
+    let data = {
+      path: String(req.body.path),
+      new_directory_name: String(req.body.new_dir_name)
+    }
+    const isCreated = await makeDirectory(data)
+    res.status(200).send({ message: isCreated ? "created!" : "directory existed!" })
   } catch (e) {
     next(e)
   }
