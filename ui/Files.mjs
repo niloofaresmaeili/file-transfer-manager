@@ -3,7 +3,12 @@ import htm from 'https://unpkg.com/htm?module';
 const html = htm.bind(h);
 
 export default function Files(props) {
+  const loadFiles = (name) => () => {
+    props.onClick(name)
+  }
   return html`<div>
-    ${props.files.map(file => html`<div>${file}</div>`)}
+    ${props.files.map(file => html`<div>
+    <span style="cursor: pointer" onClick=${loadFiles(file)}> ${file} </span>
+    </div>`)}
   </div>`
 }
