@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "serve": "nodemon ./src/index.ts",
-    "start": "nodemon",
+    "start:demon": "nodemon",
+    "prestart": "tsc",
+    "start": "node ./build/index.js",
     "build": "tsc",
     "test": "jest"
   },

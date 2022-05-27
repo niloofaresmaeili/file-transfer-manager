@@ -1,9 +1,14 @@
-import { NextFunction, Request, Response, Router } from 'express'
-export const IndexController: Router = Router()
+import express from 'express'
+import path from 'path'
+export const IndexController = express.Router()
 
-IndexController.get('/', async (req: Request, res: Response, next: NextFunction) => {
+IndexController.use('/', express.static(path.join(__dirname, '../../ui')))
+
+
+IndexController.get('/', async (req, res, next) => {
   try {
-    res.status(200).send({ data: 'Hello from File Transfer Manager!' })
+    res.status(200).sendFile(path.join(__dirname, '../../ui/index.html'))
+
   } catch (e) {
     next(e)
   }
