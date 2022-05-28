@@ -8,6 +8,8 @@ const html = htm.bind(h);
 
 const defaultFiles = ['default files']
 
+const localHistory = []
+
 export default function App() {
   const [pathName, setPathName] = useState('')
   const [token, setToken] = useState('')
@@ -24,20 +26,24 @@ export default function App() {
         setFiles(r.data.files)
       })
       .catch(console.error)
-  }, [])
+  }, [pathName])
 
   const downloadFile = (fileName) => { }
 
   const loadDirectory = (directoryPath) => {
     setPathName(prev => prev + directoryPath)
-    Get(`/files/directory/${pathName}${directoryPath}`, token)
-      .then(r => {
-        setDirectories(r.data.folders)
-        setFiles(r.data.files)
-      })
+    localHistory.push(pathName)
   }
+
+  const goBack = () => {
+    const len = localHistory.length
+    const previousPath = localHistory.pop()
+    setPathName(previousPath)
+  }
+
   return html`<div>
       <h1>File manager!</h1>
+      <button onClick=${goBack}>back</button>
       <input value=${pathName} onChange=${setPathName} />
       <${Files} files=${directories} onClick=${loadDirectory} />
       <${Files} files=${files} onClick=${downloadFile} />
