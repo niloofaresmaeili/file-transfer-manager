@@ -1,51 +1,40 @@
 import { h } from 'https://unpkg.com/preact@latest?module';
-import { useState, useEffect } from 'https://unpkg.com/preact@latest/hooks/dist/hooks.module.js?module';
 import htm from 'https://unpkg.com/htm?module';
-import { Get, Post } from './http.mjs'
 import Files from '/Files.mjs'
+import ListComponent from './List.mjs'
+import useApp from './useApp.mjs'
 
 const html = htm.bind(h);
 
-const defaultFiles = ['default files']
-
-const localHistory = []
-
 export default function App() {
-  const [pathName, setPathName] = useState('')
-  const [token, setToken] = useState('')
-  const [directories, setDirectories] = useState(defaultFiles)
-  const [files, setFiles] = useState(defaultFiles)
-  useEffect(() => {
-    Post('/auth/login', { username: 'admin', password: 'password' })
-      .then(r => {
-        setToken(r.token)
-        return Get(`/files/directory/${pathName}`, r.token)
-      })
-      .then(r => {
-        setDirectories(r.data.folders)
-        setFiles(r.data.files)
-      })
-      .catch(console.error)
-  }, [pathName])
+  const {
+    pathName,
+    setPathName,
+    directories,
+    files,
+    downloadFile,
+    loadDirectory,
+    goBack
+  } = useApp()
 
-  const downloadFile = (fileName) => { }
-
-  const loadDirectory = (directoryPath) => {
-    setPathName(prev => prev + directoryPath)
-    localHistory.push(pathName)
-  }
-
-  const goBack = () => {
-    const len = localHistory.length
-    const previousPath = localHistory.pop()
-    setPathName(previousPath)
-  }
-
-  return html`<div>
-      <h1>File manager!</h1>
-      <button onClick=${goBack}>back</button>
-      <input value=${pathName} onChange=${setPathName} />
-      <${Files} files=${directories} onClick=${loadDirectory} />
-      <${Files} files=${files} onClick=${downloadFile} />
-    </div>`;
+  return html`
+  <div>
+    <header class="py-3 mb-3 border-bottom">
+      <div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr 2fr;">
+        <div class="input-group mb-3">
+          <button onClick=${goBack} class="input-group-text" id="basic-addon1">back</button>
+          <input value=${pathName} onChange=${setPathName} class="form-control" aria-describedby="basic-addon1" type="search" placeholder="path..." aria-label="Search" />
+        </div>
+      </div>
+    </header>
+   
+    <main class="d-flex flex-nowrap">
+      <${ListComponent} list=${[...directories, ...files]} />
+      <div>
+        <${Files} files=${directories} onClick=${loadDirectory} />
+        <${Files} files=${files} onClick=${downloadFile} />
+      </div>
+    </main>
+  </div>
+    `;
 }

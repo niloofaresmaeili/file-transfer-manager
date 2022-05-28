@@ -8,7 +8,7 @@ export default function Files(props) {
   }
   return html`<div>
     ${props.files.map(file => html`<div>
-    <span style="cursor: pointer" onClick=${loadFiles(file)}> ${file} </span>
+    <span class="btn" onClick=${loadFiles(file)}> ${file} </span>
     </div>`)}
   </div>`
 }
