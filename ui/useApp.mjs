@@ -3,7 +3,12 @@ import { Get, Post } from './http.mjs'
 
 const defaultFiles = ['default files']
 const localHistory = []
-
+function downloadHelper(filePath, fileName) {
+  var link = document.createElement('a');
+  link.href = filePath;
+  link.download = fileName
+  link.click();
+}
 export default function useApp() {
   const [pathName, setPathName] = useState('')
   const [token, setToken] = useState('')
@@ -26,7 +31,7 @@ export default function useApp() {
     fetch(`/files/download/${pathName}${fileName}`, { headers: { authorization: token } })
       .then(r => r.blob())
       .then(URL.createObjectURL)
-      .then(window.open)
+      .then(url => downloadHelper(url, fileName))
   }
 
   const loadDirectory = (directoryPath) => {
