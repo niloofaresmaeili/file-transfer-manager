@@ -22,7 +22,12 @@ export default function useApp() {
       .catch(console.error)
   }, [pathName])
 
-  const downloadFile = (fileName) => { }
+  const downloadFile = (fileName) => {
+    fetch(`/files/download/${pathName}${fileName}`, { headers: { authorization: token } })
+      .then(r => r.blob())
+      .then(URL.createObjectURL)
+      .then(window.open)
+  }
 
   const loadDirectory = (directoryPath) => {
     setPathName(prev => prev + directoryPath)
