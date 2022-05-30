@@ -18,16 +18,16 @@ export default function App() {
   } = useApp()
 
   return html`
-  <div class="container-xl">
-
+  <div>  
     <${Header} goBack=${goBack} pathName=${pathName} setPathName=${setPathName} />
-   
-    <main>
 
-        <${Files} files=${directories} onClick=${loadDirectory} />
-        <${Files} files=${files} onClick=${downloadFile} />
+    <main class="container-xl">
+
+      <${Files} files=${directories} onClick=${loadDirectory} />
+      <${Files} files=${files} onClick=${downloadFile} />
 
     </main>
+    
   </div>
     `;
 }

@@ -12,10 +12,12 @@ export default function App(props) {
 
   return html`
     <header class="py-3 mb-3 border-bottom">
-      <div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr;">
-        <div class="input-group mb-3">
-          <button onClick=${goBack} class="input-group-text" id="basic-addon1">back</button>
-          <input value=${pathName} onChange=${setPathName} class="form-control" aria-describedby="basic-addon1" type="search" placeholder="path..." aria-label="Search" />
+      <div class="container-xl">
+        <div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr;">
+          <div class="input-group mb-3">
+            <button onClick=${goBack} class="input-group-text" id="basic-addon1">back</button>
+            <input value=${pathName} onChange=${setPathName} class="form-control" aria-describedby="basic-addon1" type="search" placeholder="path..." aria-label="Search" />
+          </div>
         </div>
       </div>
     </header>
