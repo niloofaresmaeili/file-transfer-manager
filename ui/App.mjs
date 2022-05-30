@@ -1,7 +1,6 @@
 import { h } from 'https://unpkg.com/preact@latest?module';
 import htm from 'https://unpkg.com/htm?module';
-import Files from '/Files.mjs'
-import ListComponent from './List.mjs'
+import Files from '/component/Files.mjs'
 import useApp from './useApp.mjs'
 
 const html = htm.bind(h);
@@ -18,7 +17,7 @@ export default function App() {
   } = useApp()
 
   return html`
-  <div>
+  <div class="container-xl">
     <header class="py-3 mb-3 border-bottom">
       <div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr;">
         <div class="input-group mb-3">
@@ -28,9 +27,8 @@ export default function App() {
       </div>
     </header>
    
-    <main class="d-flex flex-nowrap">
-      <${ListComponent} list=${[...directories, ...files]} />
-      <div>
+    <main>
+      <div class="row">
         <${Files} files=${directories} onClick=${loadDirectory} />
         <${Files} files=${files} onClick=${downloadFile} />
       </div>
