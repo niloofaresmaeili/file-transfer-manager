@@ -17,15 +17,17 @@ export default function Files(props) {
     const isEmptyName = nm === ''
     const extension = isFolder
       ? ''
-      : isEmptyName
-        ? splitted.length <= 2
-          ? file
+      : splitted.length <= 1
+        ? '-'
+        : isEmptyName
+          ? splitted.length <= 2
+            ? file
+            : (isMapFile
+              ? splitted.slice(-2).join('.')
+              : lstExt)
           : (isMapFile
             ? splitted.slice(-2).join('.')
             : lstExt)
-        : (isMapFile
-          ? splitted.slice(-2).join('.')
-          : lstExt)
     const name = isFolder
       ? file.split('/')[0]
       : isEmptyName
