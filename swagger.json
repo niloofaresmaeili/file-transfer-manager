@@ -134,6 +134,39 @@
                     }
                 }
             }
+        },
+        "/files/download/{filename}" : {
+            "get" : {
+                "summary" : "Update the tasks",
+                "description": "Update the tasks",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "filename",
+                        "in": "path",
+                        "description": "task filename that needs to be downloaded",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/todosResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
         }
     }, 
     "definitions": {
